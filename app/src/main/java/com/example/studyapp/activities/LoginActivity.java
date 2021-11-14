@@ -8,8 +8,12 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,5 +47,31 @@ public class LoginActivity extends AppCompatActivity {
         footerText.setText(footerString);
         footerText.setMovementMethod(LinkMovementMethod.getInstance());
         footerText.setHighlightColor(Color.TRANSPARENT);
+
+        //Login OnClick
+        Button loginButton = binding.loginButton;
+        EditText emailText = binding.loginEmailInput;
+        EditText passText = binding.loginPassInput;
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Verify user credentials and transition to main activity
+                Intent listIntent = new Intent(LoginActivity.this, ListActivity.class);
+                listIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                String sEmail = emailText.getText().toString();
+                String sPass = passText.getText().toString();
+
+                //Fields are not empty
+                if(!sEmail.matches("") && !sPass.matches("")) {
+                    Log.d("pass", "User: " + sEmail + " --- Pass: " + sPass);
+                    startActivity(listIntent);
+                } else {
+                    Log.d("pass", "User: " + sEmail + " --- Pass: " + sPass);
+                    Toast.makeText(getApplicationContext(), "Please enter an email and password", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
     }
 }
