@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".SplashActivity">
+    tools:context=".activities.SplashActivity">
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -21,7 +21,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@color/black"
+        android:src="@color/black"
         tools:ignore="ImageContrastCheck"
         tools:src="@tools:sample/avatars"
         tools:srcCompat="@color/black" />
@@ -66,9 +66,10 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:background="#A143C1"
+        android:backgroundTint="#A143C1"
         android:shadowColor="#4E4A4A"
         android:text="@string/splash_button"
+        app:cornerRadius="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/splashDescription" />

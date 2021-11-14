@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/activity_list.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/activity_login2.xml" value="0.23072916666666668" />
         <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/activity_main.xml" value="0.33469202898550726" />
-        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/activity_splash.xml" value="0.2234375" />
+        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/activity_register.xml" value="0.176" />
+        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/activity_splash.xml" value="0.4" />
         <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/content_login.xml" value="0.33469202898550726" />
         <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/content_login2.xml" value="0.23072916666666668" />
         <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/fragment_first.xml" value="0.33469202898550726" />

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Study App</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_register">registerActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -12,8 +12,30 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <!-- SPLASH FRAGMENT -->
+    <!-- SPLASH ACTIVITY -->
     <string name="splash_title">Never forget a test or assignment again</string>
     <string name="splash_button">Get Started</string>
     <string name="splash_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor scelerisque pellentesque quis dapibus sem amet natoque. Sed in justo, pellentesque pellentesque. Suspendisse scelerisque enim.</string>
+
+    <!-- REGISTER ACTIVITY -->
+    <string name="register_title">Welcome Aboard!</string>
+    <string name="register_subtitle">Let\'s help you keep track of your tasks</string>
+    <string name="register_footer">Already have an account? Sign in</string>
+
+    <string name="register_name_placeholder">Enter your full name</string>
+    <string name="register_email_placeholder">Enter your email</string>
+    <string name="register_pass_placeholder">Enter password</string>
+    <string name="register_pass_confirm_placeholder">Confirm Password</string>
+
+    <string name="register_button">Register</string>
+    <string name="register_button_google">Sign in with Google</string>
+
+    <!-- LOGIN ACTIVITY -->
+    <string name="login_title">Login</string>
+    <string name="login_subtitle">Press login to continue</string>
+
+    <string name="login_email_placeholder">Enter your email</string>
+    <string name="login_pass_placeholder">Enter password</string>
+
+    <string name="login_button">Login</string>
 </resources>
