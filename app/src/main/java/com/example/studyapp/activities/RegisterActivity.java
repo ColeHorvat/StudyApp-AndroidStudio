@@ -9,6 +9,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -45,6 +46,15 @@ public class RegisterActivity extends AppCompatActivity {
         footerText.setText(footerString);
         footerText.setMovementMethod(LinkMovementMethod.getInstance());
         footerText.setHighlightColor(Color.TRANSPARENT);
+
+        //TEST BUTTON
+        Button testButton = binding.testButton;
+        testButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+            }
+        });
     }
 
 }
