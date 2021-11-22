@@ -3,21 +3,34 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/activity_list.xml" value="0.4" />
+        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.246875" />
+        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/drawable/ic_baseline_arrow_left_24.xml" value="0.24739583333333334" />
+        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/drawable/ic_baseline_arrow_right_24.xml" value="0.24739583333333334" />
+        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/drawable/ic_plus.xml" value="0.246875" />
+        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/drawable/layout_modal.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/drawable/round_button.xml" value="0.246875" />
+        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/drawable/round_button_red.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/activity_list.xml" value="0.176" />
         <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/activity_login2.xml" value="0.23072916666666668" />
-        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/activity_main.xml" value="0.33469202898550726" />
-        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/activity_register.xml" value="0.176" />
+        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/activity_register.xml" value="0.536" />
         <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/activity_splash.xml" value="0.4" />
+        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/activity_timer.xml" value="0.264" />
         <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/content_login.xml" value="0.33469202898550726" />
         <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/content_login2.xml" value="0.23072916666666668" />
         <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/fragment_first.xml" value="0.33469202898550726" />
         <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/fragment_first2.xml" value="0.23072916666666668" />
+        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/fragment_list.xml" value="0.4" />
         <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/fragment_login.xml" value="0.22864583333333333" />
         <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/fragment_register.xml" value="0.3278985507246377" />
         <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/fragment_second.xml" value="0.33469202898550726" />
         <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/fragment_second2.xml" value="0.23072916666666668" />
         <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/fragment_splash.xml" value="0.264" />
+        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/fragment_task.xml" value="0.2" />
+        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/fragment_timer.xml" value="0.2" />
+        <entry key="..\:/Users/ColeH/AndroidStudioProjects/StudyApp/app/src/main/res/layout/task_dialog.xml" value="0.4" />
       </map>
     </option>
   </component>

@@ -38,4 +38,23 @@
     <string name="login_pass_placeholder">Enter password</string>
 
     <string name="login_button">Login</string>
+
+    <!-- MAIN ACTIVITY -->
+    <string name="timer_swipe">Timer</string>
+
+    <!-- TIMER ACTIVITY -->
+    <string name="task_swipe">Tasks</string>
+    <string name="timer_default">00</string>
+    <string name="timer_colon">:</string>
+
+    <string name="button_start">Start</string>
+    <string name="button_pause">Pause</string>
+    <string name="button_reset">Reset</string>
+
+    <!-- TASK DIALOG -->
+    <string name="dialog_title">Task title...</string>
+    <string name="dialog_description">Task description...</string>
+    <string name="group_prompt">Group</string>
+    <string name="dialog_button">Confirm</string>
+
 </resources>
