@@ -60,12 +60,4 @@
         app:layout_constraintTop_toTopOf="@+id/view"
         app:layout_constraintVertical_bias="0.542" />
 
-    <ImageButton
-        android:id="@+id/imageButton4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_baseline_arrow_right_24"
-        tools:layout_editor_absoluteX="196dp"
-        tools:layout_editor_absoluteY="201dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

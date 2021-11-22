@@ -56,6 +56,9 @@ public class TimerActivity extends AppCompatActivity {
                 if(hours == 0 && minutes == 0 && seconds == 0) {
                     Toast.makeText(getApplicationContext(), "Please enter a value", Toast.LENGTH_LONG).show();
                     return;
+                } else if(minutes > 60 || seconds > 60) {
+                    Toast.makeText(getApplicationContext(), "Minute or seconds value is too high", Toast.LENGTH_LONG).show();
+                    return;
                 }
 
                 timeLeftInMillis = calculateStartTime(hours, minutes, seconds);
@@ -135,7 +138,8 @@ public class TimerActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-
+                resetTimer();
+                //TODO: Add Alarm/Notification
             }
         }.start();
 
@@ -152,9 +156,9 @@ public class TimerActivity extends AppCompatActivity {
         Integer uMinutes = (int) ((timeLeftInMillis / (1000*60)) % 60);
         Integer uSeconds = (int) (timeLeftInMillis / 1000) % 60;
 
-        hourText.setText(uHours.toString());
-        minuteText.setText(uMinutes.toString());
-        secondsText.setText(uSeconds.toString());
+        hourText.setText(String.format("%02d", uHours));
+        minuteText.setText(String.format("%02d", uMinutes));
+        secondsText.setText(String.format("%02d", uSeconds));
     }
 
     private long calculateStartTime(int hours, int minutes, int seconds) {

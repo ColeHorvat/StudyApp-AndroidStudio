@@ -51,4 +51,10 @@
     <string name="button_pause">Pause</string>
     <string name="button_reset">Reset</string>
 
+    <!-- TASK DIALOG -->
+    <string name="dialog_title">Task title...</string>
+    <string name="dialog_description">Task description...</string>
+    <string name="group_prompt">Group</string>
+    <string name="dialog_button">Confirm</string>
+
 </resources>
