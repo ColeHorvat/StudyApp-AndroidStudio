@@ -35,10 +35,9 @@ class TaskTypeConverters {
 
 @Entity(tableName = "task_table")
 public class Task {
-    @PrimaryKey
-    @NonNull
-    @ColumnInfo(name = "id")
-    private Integer id;
+
+    @PrimaryKey(autoGenerate = true)
+    private Integer id = 1;
 
     @NonNull
     @ColumnInfo(name = "title")
@@ -55,13 +54,11 @@ public class Task {
 
     //Constructor
     public Task(
-            Integer id,
             String title,
             String description,
             String group,
             Float timeProgress
     ) {
-        this.id = id;
         this.title = title;
         this.description = description;
         this.group = group;
