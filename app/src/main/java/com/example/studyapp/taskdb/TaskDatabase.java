@@ -48,8 +48,6 @@ public abstract class TaskDatabase extends RoomDatabase {
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
         private final TaskDao mDao;
-        String[] names = {"John Smith", "Mark Elliot", "Jack Taylor"};
-        String[] emails = {"jsmit@mytru.ca", "melliot@mytru.ca", "jtaylor@mytru.ca"};
 
         PopulateDbAsync(TaskDatabase db) {
             mDao = db.TaskDao();
@@ -63,12 +61,11 @@ public abstract class TaskDatabase extends RoomDatabase {
             mDao.deleteAll();
 
             //TODO: Add back in for testing later
-            /*
-            for (int i = 0; i <= names.length - 1; i++) {
-                Task task = new Task(i, names[i], emails[i]);
-                mDao.insert(task);
-            }
-            */
+
+
+            Task task = new Task(1, "Test Task", "", "", 0.00f);
+            mDao.insert(task);
+
 
             return null;
         }

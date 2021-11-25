@@ -13,7 +13,7 @@ import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
 
-@Entity(tableName = "task_table")
+
 
 class TaskTypeConverters {
     @TypeConverter
@@ -33,20 +33,19 @@ class TaskTypeConverters {
     }
 }
 
+@Entity(tableName = "task_table")
 public class Task {
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "id")
     private Integer id;
 
+    @NonNull
     @ColumnInfo(name = "title")
     private String title;
 
     @ColumnInfo(name = "description")
     private String description;
-
-    @ColumnInfo(name = "dueDate")
-    private Date dueDate;
 
     @ColumnInfo(name = "group")
     private String group;
@@ -54,26 +53,19 @@ public class Task {
     @ColumnInfo(name = "timeProgress")
     private Float timeProgress;
 
-    @ColumnInfo(name = "reminderTimes")
-    private String reminderTimes;
-
     //Constructor
     public Task(
-            int id,
+            Integer id,
             String title,
             String description,
-            Date dueDate,
             String group,
-            Float timeProgress,
-            List<Date> reminderDates
-            ) {
+            Float timeProgress
+    ) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.dueDate = dueDate;
         this.group = group;
         this.timeProgress = timeProgress;
-        this.reminderTimes = TaskTypeConverters.datesToString(reminderDates);
     }
 
     //Getters & Setters
@@ -91,15 +83,13 @@ public class Task {
 
     public void setDescription(String description) { this.description = description; }
 
-    public Date getDueDate() { return dueDate; }
-
-    public void setDueDate(Date dueDate) { this.dueDate = dueDate; }
-
     public String getGroup() { return group; }
 
     public void setGroup(String group) { this.group = group; }
 
     public Float getTimeProgress() { return timeProgress; }
 
-    public void setReminderTimes(String reminderTimes) { this.reminderTimes = reminderTimes; }
+    public void setTimeProgress(Float timeProgress) {
+        this.timeProgress = timeProgress;
+    }
 }
