@@ -57,15 +57,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Verify user credentials and transition to main activity
-                Intent listIntent = new Intent(LoginActivity.this, ListActivity.class);
-                listIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
                 String sEmail = emailText.getText().toString();
                 String sPass = passText.getText().toString();
 
                 //Fields are not empty
                 if(!sEmail.matches("") && !sPass.matches("")) {
                     Log.d("pass", "User: " + sEmail + " --- Pass: " + sPass);
-                    startActivity(listIntent);
+                    startActivity(mainIntent);
                 } else {
                     Log.d("pass", "User: " + sEmail + " --- Pass: " + sPass);
                     Toast.makeText(getApplicationContext(), "Please enter an email and password", Toast.LENGTH_LONG).show();
