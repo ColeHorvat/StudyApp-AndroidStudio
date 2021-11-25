@@ -13,14 +13,23 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studyapp.R;
 import com.example.studyapp.databinding.ActivityMainBinding;
+import com.example.studyapp.taskdb.Task;
+import com.example.studyapp.taskdb.TaskListAdapter;
+import com.example.studyapp.taskdb.TaskViewModel;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-
+    private TaskViewModel mTaskViewModel;
     FragmentManager fragmentManager;
 
     @Override
@@ -49,6 +58,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showTaskDialog();
+            }
+        });
+
+        //Recycler View Adapter
+        mTaskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
+
+        RecyclerView recyclerView = binding.taskRecycler;
+        final TaskListAdapter adapter = new TaskListAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mTaskViewModel.getAllTasks().observe(this, new Observer<List<Task>>() {
+            @Override
+            public void onChanged(List<Task> tasks) {
+                adapter.setTasks(tasks);
             }
         });
     }
