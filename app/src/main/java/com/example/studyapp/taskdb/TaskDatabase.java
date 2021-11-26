@@ -9,7 +9,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {Task.class}, version = 3, exportSchema = false)
+@Database(entities = {Task.class}, version = 4, exportSchema = false)
 public abstract class TaskDatabase extends RoomDatabase {
     public abstract TaskDao TaskDao();
     private static TaskDatabase INSTANCE;
@@ -23,13 +23,18 @@ public abstract class TaskDatabase extends RoomDatabase {
                             // Wipes and rebuilds instead of migrating
                             // if no Migration object.
                             // Migration is not part of this practical.
-                            .fallbackToDestructiveMigration()
-                            .addCallback(sRoomDatabaseCallback)
+                            //.fallbackToDestructiveMigration()
+                            //.addCallback(sRoomDatabaseCallback)
                             .build();
                 }
             }
         }
         return INSTANCE;
+    }
+
+    public static void destroyInstance() {
+        if (INSTANCE != null) INSTANCE.close();
+        INSTANCE = null;
     }
 
     private static RoomDatabase.Callback sRoomDatabaseCallback =

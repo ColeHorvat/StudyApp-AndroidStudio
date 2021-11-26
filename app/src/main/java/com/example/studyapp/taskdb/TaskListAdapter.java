@@ -31,7 +31,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
     public void onBindViewHolder(@NonNull TaskListAdapter.TaskViewHolder holder, int position) {
         if (mTasks != null) {
             Task current = mTasks.get(position);
-            holder.TaskItemView.setText(current.getId() + " - " + current.getTitle());
+            holder.TaskItemView.setText(current.getTitle());
         } else {
             holder.TaskItemView.setText("No Tasks");
         }
@@ -56,7 +56,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
 
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
-            TaskItemView = itemView.findViewById(R.id.textView);
+            TaskItemView = itemView.findViewById(R.id.titleText);
         }
     }
 }

@@ -57,12 +57,15 @@ public class MainActivity extends AppCompatActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showTaskDialog();
+                //showTaskDialog();
+                Task testTask = new Task("Test Task", "", "", 0.00f);
+                mTaskViewModel.insert(testTask);
             }
         });
 
         //Recycler View Adapter
         mTaskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
+
 
         RecyclerView recyclerView = binding.taskRecycler;
         final TaskListAdapter adapter = new TaskListAdapter(this);

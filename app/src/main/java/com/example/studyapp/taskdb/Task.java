@@ -37,7 +37,8 @@ class TaskTypeConverters {
 public class Task {
 
     @PrimaryKey(autoGenerate = true)
-    private Integer id = 1;
+    @ColumnInfo(name = "id")
+    private int id;
 
     @NonNull
     @ColumnInfo(name = "title")
