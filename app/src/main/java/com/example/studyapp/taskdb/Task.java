@@ -4,34 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverter;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.Date;
-import java.util.List;
-
-
-
-class TaskTypeConverters {
-    @TypeConverter
-    public static List<Date> stringToDate(String json) {
-        Gson gson = new Gson();
-        Type type = new TypeToken<List<Date>>() {}.getType();
-        List<Date> dates = gson.fromJson(json, type);
-        return dates;
-    }
-
-    @TypeConverter
-    public static String datesToString(List<Date> list) {
-        Gson gson = new Gson();
-        Type type = new TypeToken<List<Date>>() {}.getType();
-        String json = gson.toJson(list, type);
-        return json;
-    }
-}
 
 @Entity(tableName = "task_table")
 public class Task {

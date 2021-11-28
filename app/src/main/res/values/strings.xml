@@ -41,6 +41,7 @@
 
     <!-- MAIN ACTIVITY -->
     <string name="timer_swipe">Timer</string>
+    <string name="task_time_default">0.00</string>
 
     <!-- TIMER ACTIVITY -->
     <string name="task_swipe">Tasks</string>

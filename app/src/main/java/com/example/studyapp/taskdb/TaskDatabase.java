@@ -23,8 +23,8 @@ public abstract class TaskDatabase extends RoomDatabase {
                             // Wipes and rebuilds instead of migrating
                             // if no Migration object.
                             // Migration is not part of this practical.
-                            //.fallbackToDestructiveMigration()
-                            //.addCallback(sRoomDatabaseCallback)
+                            .fallbackToDestructiveMigration()
+                            .addCallback(sRoomDatabaseCallback)
                             .build();
                 }
             }
@@ -63,7 +63,7 @@ public abstract class TaskDatabase extends RoomDatabase {
             // Start the app with a clean database every time.
             // Not needed if you only populate the database
             // when it is first created
-            //mDao.deleteAll();
+            mDao.deleteAll();
 
             //TODO: Add back in for testing later
 

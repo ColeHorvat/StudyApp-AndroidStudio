@@ -25,7 +25,9 @@ public class TaskRepository {
         new insertAsyncTask(mTaskDao).execute(Task);
     }
 
-    private static class insertAsyncTask extends AsyncTask<Task, Void, Void> {
+    public void update (Task Task) { new updateAsyncTask(mTaskDao).execute(Task); }
+
+    private static class insertAsyncTask extends android.os.AsyncTask<Task, Void, Void> {
 
         private TaskDao mAsyncTaskDao;
 
@@ -36,6 +38,21 @@ public class TaskRepository {
         @Override
         protected Void doInBackground(final Task... params) {
             mAsyncTaskDao.insert(params[0]);
+            return null;
+        }
+    }
+
+    private static class updateAsyncTask extends AsyncTask<Task, Void, Void> {
+
+        private TaskDao mAsyncTaskDao;
+
+        updateAsyncTask(TaskDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Task... params) {
+            mAsyncTaskDao.updateTask(params[0]);
             return null;
         }
     }

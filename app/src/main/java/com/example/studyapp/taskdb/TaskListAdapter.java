@@ -31,9 +31,23 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
     public void onBindViewHolder(@NonNull TaskListAdapter.TaskViewHolder holder, int position) {
         if (mTasks != null) {
             Task current = mTasks.get(position);
-            holder.TaskItemView.setText(current.getTitle());
+            String taskTitleString;
+            String taskDescriptionString;
+
+            taskTitleString = current.getTitle().toString();
+            taskDescriptionString = current.getDescription().toString();
+
+            if(taskTitleString.length() > 10)
+                taskTitleString = taskTitleString.substring(0,9) + "...";
+            if(taskDescriptionString.length() > 10)
+                taskDescriptionString = taskDescriptionString.substring(0,9) + "...";
+
+
+            holder.taskTitleText.setText(taskTitleString);
+            holder.taskDescriptionText.setText(taskDescriptionString);
+
         } else {
-            holder.TaskItemView.setText("No Tasks");
+            holder.taskTitleText.setText("No Tasks");
         }
     }
 
@@ -52,11 +66,15 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
 
     class TaskViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView TaskItemView;
+        private final TextView taskTitleText;
+        private final TextView taskDescriptionText;
 
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
-            TaskItemView = itemView.findViewById(R.id.titleText);
+            taskTitleText = itemView.findViewById(R.id.titleText);
+            taskDescriptionText = itemView.findViewById(R.id.descriptionText);
+
         }
     }
+
 }

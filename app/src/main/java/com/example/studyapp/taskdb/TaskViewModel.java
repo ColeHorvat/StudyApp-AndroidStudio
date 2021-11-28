@@ -27,4 +27,8 @@ public class TaskViewModel extends AndroidViewModel {
         //DatabaseReference myRef = remoteDB.getReference("Task - " + task.getId());
         //myRef.setValue(task);
     }
+
+    public void update(Task task) {
+        mRepository.update(task);
+    }
 }
