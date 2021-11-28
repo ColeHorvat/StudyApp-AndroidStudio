@@ -8,7 +8,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -57,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //showTaskDialog();
-                Task testTask = new Task("Test Task", "", "", 0.00f);
-                mTaskViewModel.insert(testTask);
+                showTaskDialog();
+                //Task testTask = new Task("Test Task", "", "", 0.00f);
+                //mTaskViewModel.insert(testTask);
             }
         });
 
@@ -90,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
 
         EditText taskTitle = dialog.findViewById(R.id.titleEditText);
         EditText taskDescription = dialog.findViewById(R.id.descriptionEditText);
-        Spinner groupSpinner = dialog.findViewById(R.id.groupSpinner);
         Button confirmButton = dialog.findViewById(R.id.dialogButton);
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
@@ -108,20 +106,13 @@ public class MainActivity extends AppCompatActivity {
                 }
                 taskTitleString = taskTitle.getText().toString();
 
-                if(taskDescription.getText().toString().matches(""))
-                    taskDescriptionString = null;
-                else
-                    taskDescriptionString = taskDescription.getText().toString();
-
-                if(groupSpinner.getSelectedItem().toString().matches(""))
-                    groupSelection = null;
-                else
-                    groupSelection = groupSpinner.getSelectedItem().toString();
+                taskDescriptionString = taskDescription.getText().toString();
 
 
 
                 //TODO: Add task to ROOM
-
+                Task newTask = new Task(taskTitleString, taskDescriptionString, "", 0.00f);
+                mTaskViewModel.insert(newTask);
                 dialog.dismiss();
             }
         });
