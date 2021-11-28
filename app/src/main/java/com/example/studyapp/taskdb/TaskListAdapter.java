@@ -16,15 +16,19 @@ import java.util.List;
 public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>{
 
     private final LayoutInflater mInflater;
-    private List<Task> mTasks; // Cached copy of words
+    public List<Task> mTasks; // Cached copy of tasks
+    private OnTaskClickListener onTaskClickListener;
 
-    public TaskListAdapter(Context context) { mInflater = LayoutInflater.from(context); }
+    public TaskListAdapter(Context context, OnTaskClickListener onTaskClickListener) {
+        mInflater = LayoutInflater.from(context);
+        this.onTaskClickListener = onTaskClickListener;
+    }
 
     @NonNull
     @Override
     public TaskListAdapter.TaskViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = mInflater.inflate(R.layout.recyclerview_item, parent, false);
-        return new TaskViewHolder(itemView);
+        return new TaskViewHolder(itemView, onTaskClickListener);
     }
 
     @Override
@@ -64,17 +68,29 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
             return 0;
     }
 
-    class TaskViewHolder extends RecyclerView.ViewHolder {
+    class TaskViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final TextView taskTitleText;
         private final TextView taskDescriptionText;
+        OnTaskClickListener onTaskClickListener;
 
-        public TaskViewHolder(@NonNull View itemView) {
+        public TaskViewHolder(@NonNull View itemView, OnTaskClickListener onTaskClickListener) {
             super(itemView);
             taskTitleText = itemView.findViewById(R.id.titleText);
             taskDescriptionText = itemView.findViewById(R.id.descriptionText);
+            this.onTaskClickListener = onTaskClickListener;
 
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            onTaskClickListener.onTaskClick(mTasks.get(getAdapterPosition()));
+        }
+    }
+
+    public interface OnTaskClickListener {
+        void onTaskClick(Task current);
     }
 
 }

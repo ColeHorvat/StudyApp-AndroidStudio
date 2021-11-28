@@ -3,6 +3,7 @@ package com.example.studyapp.taskdb;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "task_table")
@@ -32,6 +33,22 @@ public class Task {
             String group,
             Float timeProgress
     ) {
+        this.title = title;
+        this.description = description;
+        this.group = group;
+        this.timeProgress = timeProgress;
+    }
+
+    @Ignore
+    //ID Constructor
+    public Task(
+            int id,
+            String title,
+            String description,
+            String group,
+            Float timeProgress
+    ) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.group = group;
