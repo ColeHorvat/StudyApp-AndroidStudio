@@ -41,11 +41,10 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
             taskTitleString = current.getTitle().toString();
             taskDescriptionString = current.getDescription().toString();
 
-            if(taskTitleString.length() > 10)
-                taskTitleString = taskTitleString.substring(0,9) + "...";
+           // if(taskTitleString.length() > 10)
+                //taskTitleString = taskTitleString.substring(0,9) + "...";
             if(taskDescriptionString.length() > 10)
-                taskDescriptionString = taskDescriptionString.substring(0,9) + "...";
-
+                taskDescriptionString = taskDescriptionString.substring(0,10) + "...";
 
             holder.taskTitleText.setText(taskTitleString);
             holder.taskDescriptionText.setText(taskDescriptionString);

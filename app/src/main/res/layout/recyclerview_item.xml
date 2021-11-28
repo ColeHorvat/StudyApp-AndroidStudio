@@ -16,6 +16,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="#00374140"
+            android:maxEms="7"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/checkBox"
@@ -54,9 +55,10 @@
 
         <TextView
             android:id="@+id/descriptionText"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:gravity="center"
+            android:layout_width="116dp"
+            android:layout_height="85dp"
+            android:foregroundGravity="left|center_vertical"
+            android:gravity="start|center_vertical"
             android:textColor="#BDC3C7"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
