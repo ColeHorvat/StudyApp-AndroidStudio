@@ -3,6 +3,7 @@ package com.example.studyapp.activities;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -161,6 +162,7 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("title", "Title: " + current.getTitle());
                 mTaskViewModel.delete(current);
                 dialog.dismiss();
             }

@@ -2,7 +2,6 @@ package com.example.studyapp.taskdb;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
@@ -17,8 +16,8 @@ public interface TaskDao {
     @Update
     void updateTask(Task task);
 
-    @Delete
-    void deleteTask(Task task);
+    @Query("DELETE FROM task_table WHERE id = :id")
+    void deleteTask(int id);
 
     @Query("DELETE FROM task_table")
     void deleteAll();

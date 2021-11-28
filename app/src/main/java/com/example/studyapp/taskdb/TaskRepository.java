@@ -27,7 +27,7 @@ public class TaskRepository {
 
     public void update (Task task) { new updateAsyncTask(mTaskDao).execute(task); }
 
-    public void delete (Task task) { new updateAsyncTask(mTaskDao).execute(task); }
+    public void delete (Task task) { new deleteAsyncTask(mTaskDao).execute(task); }
 
     private static class insertAsyncTask extends android.os.AsyncTask<Task, Void, Void> {
 
@@ -69,7 +69,7 @@ public class TaskRepository {
 
         @Override
         protected Void doInBackground(final Task... params) {
-            mAsyncTaskDao.deleteTask(params[0]);
+            mAsyncTaskDao.deleteTask(params[0].getId());
             return null;
         }
     }
