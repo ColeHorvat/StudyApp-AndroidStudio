@@ -12,14 +12,18 @@ public class TaskViewModel extends AndroidViewModel {
     private TaskRepository mRepository;
 
     private LiveData<List<Task>> mAllTasks;
+    private LiveData<List<Task>> mCompletedTasks;
 
     public TaskViewModel (Application application) {
         super(application);
         mRepository = new TaskRepository(application);
         mAllTasks = mRepository.getAllTasks();
+        mCompletedTasks = mRepository.getUncompletedTasks();
     }
 
     public LiveData<List<Task>> getAllTasks() { return mAllTasks; }
+
+    public LiveData<List<Task>> getUncompletedTasks() { return mCompletedTasks; }
 
     public void insert(Task task) {
         mRepository.insert(task);

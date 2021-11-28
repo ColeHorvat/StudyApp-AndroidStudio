@@ -52,6 +52,8 @@
     <string name="button_pause">Pause</string>
     <string name="button_reset">Reset</string>
 
+    <string name="switch_text">Show Completed</string>
+
     <!-- TASK DIALOG -->
     <string name="dialog_title">Task title...</string>
     <string name="dialog_description">Task description...</string>

@@ -24,4 +24,7 @@ public interface TaskDao {
 
     @Query("SELECT * FROM task_table ORDER BY id ASC")
     LiveData<List<Task>> getAllTasks();
+
+    @Query("SELECT * FROM task_table WHERE isComplete = 0 ORDER BY id ASC")
+    LiveData<List<Task>> getUncompletedTasks();
 }

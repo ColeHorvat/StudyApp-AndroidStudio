@@ -20,23 +20,23 @@ public class Task {
     @ColumnInfo(name = "description")
     private String description;
 
-    @ColumnInfo(name = "group")
-    private String group;
-
     @ColumnInfo(name = "timeProgress")
     private Float timeProgress;
+
+    @ColumnInfo(name = "isComplete")
+    private int isComplete;
 
     //Constructor
     public Task(
             String title,
             String description,
-            String group,
-            Float timeProgress
+            Float timeProgress,
+            int isComplete
     ) {
         this.title = title;
         this.description = description;
-        this.group = group;
         this.timeProgress = timeProgress;
+        this.isComplete = isComplete;
     }
 
     @Ignore
@@ -45,14 +45,14 @@ public class Task {
             int id,
             String title,
             String description,
-            String group,
-            Float timeProgress
+            Float timeProgress,
+            int isComplete
     ) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.group = group;
         this.timeProgress = timeProgress;
+        this.isComplete = isComplete;
     }
 
     //Getters & Setters
@@ -70,13 +70,13 @@ public class Task {
 
     public void setDescription(String description) { this.description = description; }
 
-    public String getGroup() { return group; }
-
-    public void setGroup(String group) { this.group = group; }
-
     public Float getTimeProgress() { return timeProgress; }
 
     public void setTimeProgress(Float timeProgress) {
         this.timeProgress = timeProgress;
     }
+
+    public int getIsComplete() { return isComplete; }
+
+    public void setIsComplete(int isComplete) { this.isComplete = isComplete; }
 }

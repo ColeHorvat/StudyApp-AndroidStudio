@@ -10,16 +10,20 @@ import java.util.List;
 public class TaskRepository {
     private TaskDao mTaskDao;
     private LiveData<List<Task>> mAllTasks;
+    private LiveData<List<Task>> mCompletedTasks;
 
     TaskRepository(Application application) {
         TaskDatabase db = TaskDatabase.getDatabase(application);
         mTaskDao = db.TaskDao();
         mAllTasks = mTaskDao.getAllTasks();
+        mCompletedTasks = mTaskDao.getUncompletedTasks();
     }
 
     LiveData<List<Task>> getAllTasks() {
         return mAllTasks;
     }
+
+    LiveData<List<Task>> getUncompletedTasks() { return mCompletedTasks; }
 
     public void insert (Task task) {
         new insertAsyncTask(mTaskDao).execute(task);

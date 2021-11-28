@@ -7,8 +7,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -72,12 +74,42 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mTaskViewModel.getAllTasks().observe(this, new Observer<List<Task>>() {
+        //Show Completed switch listener
+        Switch completedSwitch = binding.completedSwitch;
+
+        //Default switch is off
+        mTaskViewModel.getUncompletedTasks().observe(MainActivity.this, new Observer<List<Task>>() {
+                    @Override
+                    public void onChanged(List<Task> tasks) {
+                        adapter.setTasks(tasks);
+                    }
+                });
+
+
+        completedSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onChanged(List<Task> tasks) {
-                adapter.setTasks(tasks);
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                //Switch is on
+                if(b) {
+                    mTaskViewModel.getAllTasks().observe(MainActivity.this, new Observer<List<Task>>() {
+                        @Override
+                        public void onChanged(List<Task> tasks) {
+                            adapter.setTasks(tasks);
+                        }
+                    });
+                    //Switch is off
+                } else {
+                    mTaskViewModel.getUncompletedTasks().observe(MainActivity.this, new Observer<List<Task>>() {
+                        @Override
+                        public void onChanged(List<Task> tasks) {
+                            adapter.setTasks(tasks);
+                        }
+                    });
+                }
             }
         });
+        //TODO: Add condition for showing or not showing completed tasks
+
     }
 
     private void showCreateTaskDialog() {
@@ -108,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
 
                 taskDescriptionString = taskDescription.getText().toString();
 
-                Task newTask = new Task(taskTitleString, taskDescriptionString, "", 0.00f);
+                Task newTask = new Task(taskTitleString, taskDescriptionString, 0.00f, 1);
                 mTaskViewModel.insert(newTask);
                 dialog.dismiss();
             }
@@ -153,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
 
                 taskDescriptionString = taskDescription.getText().toString();
 
-                Task updatedTask = new Task(current.getId(), taskTitleString, taskDescriptionString, "", 0.00f);
+                Task updatedTask = new Task(current.getId(), taskTitleString, taskDescriptionString, current.getTimeProgress(), current.getIsComplete());
                 mTaskViewModel.update(updatedTask);
                 dialog.dismiss();
             }
