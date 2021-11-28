@@ -113,6 +113,8 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
             }
         });
 
+
+
         dialog.show();
 
 
@@ -129,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
         EditText taskTitle = dialog.findViewById(R.id.titleEditText);
         EditText taskDescription = dialog.findViewById(R.id.descriptionEditText);
         Button confirmButton = dialog.findViewById(R.id.dialogButton);
+        ImageButton deleteButton = dialog.findViewById(R.id.deleteButton);
 
         taskTitle.setText(current.getTitle());
         taskDescription.setText(current.getDescription());
@@ -151,6 +154,14 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
 
                 Task updatedTask = new Task(current.getId(), taskTitleString, taskDescriptionString, "", 0.00f);
                 mTaskViewModel.update(updatedTask);
+                dialog.dismiss();
+            }
+        });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mTaskViewModel.delete(current);
                 dialog.dismiss();
             }
         });

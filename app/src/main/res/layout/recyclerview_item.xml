@@ -14,12 +14,17 @@
             android:id="@+id/titleText"
             style="@style/text_view_style"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
             android:background="#00374140"
+            android:foregroundGravity="left|center_vertical"
+            android:gravity="left|center_vertical"
             android:maxEms="7"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/descriptionText"
             app:layout_constraintStart_toEndOf="@+id/checkBox"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="placeholder text" />
 
         <CheckBox
@@ -55,10 +60,10 @@
 
         <TextView
             android:id="@+id/descriptionText"
-            android:layout_width="116dp"
-            android:layout_height="85dp"
-            android:foregroundGravity="left|center_vertical"
-            android:gravity="start|center_vertical"
+            android:layout_width="139dp"
+            android:layout_height="112dp"
+            android:foregroundGravity="center"
+            android:gravity="center|center_vertical"
             android:textColor="#BDC3C7"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
