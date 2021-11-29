@@ -1,8 +1,11 @@
 package com.example.studyapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.studyapp.R;
 import com.example.studyapp.databinding.ActivityTimerBinding;
 import com.example.studyapp.taskdb.Task;
 
@@ -24,10 +28,17 @@ public class TimerActivity extends AppCompatActivity {
     private EditText hourText, minuteText, secondsText;
     private String hourString, minutesString, secondsString;
     private Integer hours, minutes, seconds;
-    private long startTimeInMillis, timeLeftInMillis;
+    private long startTimeInMillis, timeLeftInMillis, timeElapsedInMillis;
+    private float rHours, rSeconds, savedTime;
     private Button startButton, pauseButton, resetButton;
     private CountDownTimer countDownTimer;
+    private Spinner timerSpinner;
     private boolean timerRunning;
+
+
+    Context context = TimerActivity.this;
+    SharedPreferences pref;
+    SharedPreferences.Editor prefEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +47,9 @@ public class TimerActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
         getSupportActionBar().hide();
+
+        pref = context.getSharedPreferences(getString(R.string.timer_prefs), Context.MODE_PRIVATE);
+        prefEdit = pref.edit();
 
         //Initialize buttons & edit texts
         startButton = binding.startButton;
@@ -67,6 +81,7 @@ public class TimerActivity extends AppCompatActivity {
                 }
 
                 timeLeftInMillis = calculateStartTime(hours, minutes, seconds);
+                startTimeInMillis = timeLeftInMillis;
 
                 startButton.setVisibility(View.INVISIBLE);
                 pauseButton.setVisibility(View.VISIBLE);
@@ -128,7 +143,7 @@ public class TimerActivity extends AppCompatActivity {
             spinnerTitleArray[i] = spinnerList.get(i).getTitle();
         }
 
-        Spinner timerSpinner = binding.spinner;
+        timerSpinner = binding.spinner;
 
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerTitleArray);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -156,11 +171,32 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     private void startTimer() {
+        String selectedTask = timerSpinner.getSelectedItem().toString();
+
+        rSeconds = 0.00f;
+
+
+        if(!pref.contains(selectedTask)) {
+            prefEdit.putFloat(selectedTask, 0.00f);
+            prefEdit.apply();
+        }
+
+        savedTime = pref.getFloat(selectedTask, 0.00f);
+        rHours = 0.00f + savedTime;
 
         countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
             public void onTick(long l) {
                 timeLeftInMillis = l;
+                timeElapsedInMillis = startTimeInMillis - timeLeftInMillis;
+
+                rSeconds += 1.00;
+                rHours += (rSeconds/60)/60;
+
+                prefEdit.putFloat(selectedTask, rHours);
+                prefEdit.apply();
+                Log.d("timer", "Time: " + pref.getFloat(selectedTask, 69.00f));
+
                 updateCountDownText();
             }
 

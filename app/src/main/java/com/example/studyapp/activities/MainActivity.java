@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
     FragmentManager fragmentManager;
     TaskListAdapter adapter;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,12 +49,13 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
 
         fragmentManager = getSupportFragmentManager();
 
+
         //Timer Button Listener
         ImageButton timerButton = binding.timerButton;
         timerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Start timer activity
+                //Start timer fragment
                 Intent timerIntent = new Intent(MainActivity.this, TimerActivity.class);
                 timerIntent.putExtra("SpinnerList", (Serializable) adapter.mTasks);
                 startActivity(timerIntent);
@@ -92,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
         completedSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b) {
+                if (b) {
                     mTaskViewModel.getAllTasks().observe(MainActivity.this, new Observer<List<Task>>() {
                         @Override
                         public void onChanged(List<Task> tasks) {
@@ -227,5 +230,7 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
         Task newCheckTask = new Task(current.getId(), current.getTitle(), current.getDescription(), current.getTimeProgress(), newCompleted);
         mTaskViewModel.update(newCheckTask);
     }
+
+
 
 }

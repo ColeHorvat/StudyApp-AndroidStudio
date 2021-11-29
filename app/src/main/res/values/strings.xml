@@ -60,4 +60,7 @@
     <string name="group_prompt">Group</string>
     <string name="dialog_button">Confirm</string>
 
+    <!-- SHARED PREFERENCES KEY -->
+    <string name="timer_prefs">timerPrefs</string>
+
 </resources>
