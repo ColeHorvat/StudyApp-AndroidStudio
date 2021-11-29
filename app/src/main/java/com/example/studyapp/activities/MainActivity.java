@@ -1,5 +1,6 @@
 package com.example.studyapp.activities;
 
+import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
     SharedPreferences pref;
     SharedPreferences.Editor prefEdit;
 
+    ViewGroup allViews;
+
 
 
 
@@ -52,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
         View view = binding.getRoot();
         setContentView(view);
         getSupportActionBar().hide();
+
+        allViews = (ViewGroup) view;
 
         fragmentManager = getSupportFragmentManager();
 
@@ -124,6 +130,20 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
 
 
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        ObjectAnimator fadeIn;
+
+        for(int i = 0; i < allViews.getChildCount(); i++) {
+            allViews.getChildAt(i);
+            fadeIn = ObjectAnimator.ofFloat(allViews.getChildAt(i), "alpha", 0f, 1f);
+            fadeIn.setDuration(500);
+            fadeIn.start();
+        }
     }
 
     private void showCreateTaskDialog() {
@@ -234,7 +254,6 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
         });
 
         dialog.show();
-
 
     }
 

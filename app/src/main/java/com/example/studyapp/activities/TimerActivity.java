@@ -1,5 +1,6 @@
 package com.example.studyapp.activities;
 
+import android.animation.ObjectAnimator;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +45,8 @@ public class TimerActivity extends AppCompatActivity {
     private static final String CHANNEL_ID = "timer_channel";
     private NotificationManager notificationManager;
 
+    ViewGroup allViews;
+
     SharedPreferences pref;
     SharedPreferences.Editor prefEdit;
     SharedPreferences saveTimePrefs;
@@ -55,6 +59,8 @@ public class TimerActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
         getSupportActionBar().hide();
+
+        allViews = (ViewGroup) view;
 
         create_notification_channel();
 
@@ -190,6 +196,15 @@ public class TimerActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        ObjectAnimator fadeIn;
+
+        for(int i = 0; i < allViews.getChildCount(); i++) {
+            allViews.getChildAt(i);
+            fadeIn = ObjectAnimator.ofFloat(allViews.getChildAt(i), "alpha", 0f, 1f);
+            fadeIn.setDuration(500);
+            fadeIn.start();
+        }
 
         timeLeftInMillis = saveTimePrefs.getLong("millisLeft", 0);
         timerRunning = saveTimePrefs.getBoolean("timerRunning", false);
