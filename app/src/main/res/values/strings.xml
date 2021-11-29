@@ -62,6 +62,7 @@
 
     <!-- SHARED PREFERENCES KEY -->
     <string name="timer_prefs">timerPrefs</string>
+    <string name="save_time_prefs">saveTimePrefs</string>
 
     <!-- NOTIFICATION STRINGS -->
     <string name="new_notification">Create a new notification</string>

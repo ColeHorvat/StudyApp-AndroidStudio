@@ -32,18 +32,21 @@ public class TimerActivity extends AppCompatActivity {
     private EditText hourText, minuteText, secondsText;
     private String hourString, minutesString, secondsString;
     private Integer hours, minutes, seconds;
-    private long startTimeInMillis, timeLeftInMillis, timeElapsedInMillis;
+    private long startTimeInMillis, timeLeftInMillis, timeElapsedInMillis, endTime;
     private float rHours, rSeconds, savedTime;
     private Button startButton, pauseButton, resetButton;
     private CountDownTimer countDownTimer;
     private Spinner timerSpinner;
     private boolean timerRunning;
+    private String selectedTask;
 
     private static final String CHANNEL_ID = "timer_channel";
     private NotificationManager notificationManager;
 
     SharedPreferences pref;
     SharedPreferences.Editor prefEdit;
+    SharedPreferences saveTimePrefs;
+    SharedPreferences.Editor saveTimePrefsEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,9 @@ public class TimerActivity extends AppCompatActivity {
         pref = getSharedPreferences(getString(R.string.timer_prefs), Context.MODE_PRIVATE);
         prefEdit = pref.edit();
 
+        saveTimePrefs = getSharedPreferences(getString(R.string.save_time_prefs), Context.MODE_PRIVATE);
+        saveTimePrefsEdit = saveTimePrefs.edit();
+
         //Initialize buttons & edit texts
         startButton = binding.startButton;
         pauseButton = binding.pauseButton;
@@ -71,9 +77,21 @@ public class TimerActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(timerSpinner.getSelectedItem() == null) {
+                    Toast.makeText(TimerActivity.this, "Please select a task", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                selectedTask = timerSpinner.getSelectedItem().toString();
+
                 hourString = hourText.getText().toString();
                 minutesString = minuteText.getText().toString();
                 secondsString = secondsText.getText().toString();
+
+                if(hourString == "" || minutesString == "" || secondsString == "") {
+                    Toast.makeText(TimerActivity.this, "Error with time input", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 hours = Integer.parseInt(hourString);
                 minutes = Integer.parseInt(minutesString);
@@ -156,6 +174,54 @@ public class TimerActivity extends AppCompatActivity {
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         timerSpinner.setAdapter(spinnerAdapter);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        saveTimePrefsEdit.putLong("millisLeft", timeLeftInMillis);
+        saveTimePrefsEdit.putBoolean("timerRunning", timerRunning);
+        saveTimePrefsEdit.putLong("endTime", endTime);
+
+        saveTimePrefsEdit.apply();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        timeLeftInMillis = saveTimePrefs.getLong("millisLeft", 0);
+        timerRunning = saveTimePrefs.getBoolean("timerRunning", false);
+
+        if(timerRunning) {
+            endTime = saveTimePrefs.getLong("endTime", 0);
+            timeLeftInMillis = endTime - System.currentTimeMillis();
+
+            if(timeLeftInMillis < 0) {
+                timeLeftInMillis = 0;
+                timerRunning = false;
+                updateCountDownText();
+
+                hourText.setText("00");
+                minuteText.setText("00");
+                secondsText.setText("00");
+
+                startButton.setVisibility(View.VISIBLE);
+                resetButton.setVisibility(View.INVISIBLE);
+                pauseButton.setVisibility(View.INVISIBLE);
+
+                hourText.setEnabled(true);
+                minuteText.setEnabled(true);
+                secondsText.setEnabled(true);
+            } else {
+                startButton.setVisibility(View.INVISIBLE);
+                resetButton.setVisibility(View.VISIBLE);
+                pauseButton.setVisibility(View.VISIBLE);
+
+                startTimer();
+            }
+        }
 
 
     }
@@ -180,19 +246,7 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     private void startTimer() {
-        String selectedTask;
-
-        if(timerSpinner.getSelectedItem() != null)
-            selectedTask = timerSpinner.getSelectedItem().toString();
-        else {
-            Toast.makeText(this, "Please specify a task", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-
-
-        rSeconds = 0.00f;
-
+        endTime = System.currentTimeMillis() + timeLeftInMillis;
 
         if(!pref.contains(selectedTask)) {
             prefEdit.putFloat(selectedTask, 0.00f);
@@ -208,7 +262,6 @@ public class TimerActivity extends AppCompatActivity {
                 timeLeftInMillis = l;
                 timeElapsedInMillis = startTimeInMillis - timeLeftInMillis;
 
-                rSeconds += 1.00;
                 rHours += (1.00/60.00)/60.00;
 
                 prefEdit.putFloat(selectedTask, rHours);
