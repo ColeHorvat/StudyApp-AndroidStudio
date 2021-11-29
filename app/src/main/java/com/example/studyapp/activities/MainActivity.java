@@ -27,6 +27,7 @@ import com.example.studyapp.taskdb.TaskListAdapter;
 import com.example.studyapp.taskdb.TaskViewModel;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements TaskListAdapter.OnTaskClickListener{
@@ -131,6 +132,11 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
 
                 String taskTitleString;
                 String taskDescriptionString;
+                String[] titles = new String[adapter.mTasks.size()];
+
+                for(int i = 0; i < adapter.mTasks.size(); i++) {
+                    titles[i] = adapter.mTasks.get(i).getTitle();
+                }
 
                 //Check if fields have been filled and assign values
                 if(taskTitle.getText().toString().matches("")) {
@@ -138,6 +144,11 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
                     return;
                 }
                 taskTitleString = taskTitle.getText().toString();
+
+                if(Arrays.asList(titles).contains(taskTitleString)) {
+                    Toast.makeText(getApplicationContext(), "A task with this title already exists", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 taskDescriptionString = taskDescription.getText().toString();
 
