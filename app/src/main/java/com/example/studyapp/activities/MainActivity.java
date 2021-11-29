@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
     SharedPreferences pref;
     SharedPreferences.Editor prefEdit;
 
+    String[] titles;
+
     ViewGroup allViews;
 
 
@@ -164,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
 
                 String taskTitleString;
                 String taskDescriptionString;
-                String[] titles = new String[adapter.mTasks.size()];
+                titles = new String[adapter.mTasks.size()];
 
                 for(int i = 0; i < adapter.mTasks.size(); i++) {
                     titles[i] = adapter.mTasks.get(i).getTitle();
@@ -213,6 +215,7 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
         taskTitle.setText(current.getTitle());
         taskDescription.setText(current.getDescription());
 
+
         if(pref.contains(current.getTitle())) {
             float newTime = pref.getFloat(current.getTitle(), 0.00f);
             String newTimeString = String.format("%.2f", newTime);
@@ -226,12 +229,19 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
                 String taskTitleString;
                 String taskDescriptionString;
 
+                titles = new String[adapter.mTasks.size()];
+
                 //Check if fields have been filled and assign values
                 if(taskTitle.getText().toString().matches("")) {
                     Toast.makeText(getApplicationContext(), "Title is required", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 taskTitleString = taskTitle.getText().toString();
+
+                if(Arrays.asList(titles).contains(taskTitleString)) {
+                    Toast.makeText(getApplicationContext(), "A task with this title already exists", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 taskDescriptionString = taskDescription.getText().toString();
 
