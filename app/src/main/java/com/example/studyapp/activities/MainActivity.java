@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
         for(int i = 0; i < allViews.getChildCount(); i++) {
             allViews.getChildAt(i);
             fadeIn = ObjectAnimator.ofFloat(allViews.getChildAt(i), "alpha", 0f, 1f);
-            fadeIn.setDuration(500);
+            fadeIn.setDuration(750);
             fadeIn.start();
         }
     }
