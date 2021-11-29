@@ -214,6 +214,8 @@ public class TimerActivity extends AppCompatActivity {
                 hourText.setEnabled(true);
                 minuteText.setEnabled(true);
                 secondsText.setEnabled(true);
+
+                timerSpinner.setEnabled(true);
             } else {
                 startButton.setVisibility(View.INVISIBLE);
                 resetButton.setVisibility(View.VISIBLE);
@@ -239,10 +241,12 @@ public class TimerActivity extends AppCompatActivity {
         minuteText.setEnabled(true);
         secondsText.setEnabled(true);
 
+        timerSpinner.setEnabled(true);
 
         startButton.setVisibility(View.VISIBLE);
         resetButton.setVisibility(View.INVISIBLE);
         pauseButton.setVisibility(View.INVISIBLE);
+
     }
 
     private void startTimer() {
@@ -252,6 +256,8 @@ public class TimerActivity extends AppCompatActivity {
             prefEdit.putFloat(selectedTask, 0.00f);
             prefEdit.apply();
         }
+
+        timerSpinner.setEnabled(false);
 
         savedTime = pref.getFloat(selectedTask, 0.00f);
         rHours = 0.00f + savedTime;
