@@ -26,6 +26,7 @@ import com.example.studyapp.taskdb.Task;
 import com.example.studyapp.taskdb.TaskListAdapter;
 import com.example.studyapp.taskdb.TaskViewModel;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements TaskListAdapter.OnTaskClickListener{
@@ -50,8 +51,10 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
         timerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Start login activity
-                startActivity(new Intent(MainActivity.this, TimerActivity.class));
+                //Start timer activity
+                Intent timerIntent = new Intent(MainActivity.this, TimerActivity.class);
+                timerIntent.putExtra("SpinnerList", (Serializable) adapter.mTasks);
+                startActivity(timerIntent);
             }
         });
 

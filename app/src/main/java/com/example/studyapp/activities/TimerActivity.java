@@ -4,14 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.studyapp.databinding.ActivityTimerBinding;
+import com.example.studyapp.taskdb.Task;
+
+import java.util.List;
 
 public class TimerActivity extends AppCompatActivity {
 
@@ -75,6 +80,8 @@ public class TimerActivity extends AppCompatActivity {
             }
         });
 
+
+
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,6 +113,27 @@ public class TimerActivity extends AppCompatActivity {
                 startActivity(new Intent(TimerActivity.this, MainActivity.class));
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Intent mainIntent = getIntent();
+        List<Task> spinnerList = (List<Task>) mainIntent.getSerializableExtra("SpinnerList");
+
+        String[] spinnerTitleArray = new String[spinnerList.size()];
+
+        for(int i = 0; i < spinnerList.size(); i++) {
+            spinnerTitleArray[i] = spinnerList.get(i).getTitle();
+        }
+
+        Spinner timerSpinner = binding.spinner;
+
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerTitleArray);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        timerSpinner.setAdapter(spinnerAdapter);
     }
 
     private void resetTimer() {

@@ -46,8 +46,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
             taskTitleString = current.getTitle().toString();
             taskDescriptionString = current.getDescription().toString();
 
-           // if(taskTitleString.length() > 10)
-                //taskTitleString = taskTitleString.substring(0,9) + "...";
+
             if(taskDescriptionString.length() > 10)
                 taskDescriptionString = taskDescriptionString.substring(0,10) + "...";
 
@@ -57,19 +56,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
             isChecked = current.getIsComplete() == 1 ? true : false;
 
             holder.completedCheck.setChecked(isChecked);
-/*
-            holder.completedCheck.setChecked(mCheckedItems.get(position));
 
-            holder.completedCheck.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int p = holder.getAdapterPosition();
-                    final boolean newValue = !holder.completedCheck.isChecked();
-
-                    mCheckedItems.put(p, newValue);
-                }
-            });
-*/
             holder.completedCheck.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
