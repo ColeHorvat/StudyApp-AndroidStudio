@@ -1,7 +1,9 @@
 package com.example.studyapp.activities;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
     private TaskViewModel mTaskViewModel;
     FragmentManager fragmentManager;
     TaskListAdapter adapter;
+    SharedPreferences pref;
+    SharedPreferences.Editor prefEdit;
+
 
 
 
@@ -48,6 +54,9 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
         getSupportActionBar().hide();
 
         fragmentManager = getSupportFragmentManager();
+
+        pref = getSharedPreferences(getString(R.string.timer_prefs), Context.MODE_PRIVATE);
+        prefEdit = pref.edit();
 
 
         //Timer Button Listener
@@ -169,7 +178,6 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
     }
 
     private void showTaskDescriptionDialog(Task current) {
-        //TODO: Find a way to use view binding here
         final Dialog dialog = new Dialog(MainActivity.this);
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -178,11 +186,18 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
 
         EditText taskTitle = dialog.findViewById(R.id.titleEditText);
         EditText taskDescription = dialog.findViewById(R.id.descriptionEditText);
+        TextView descriptionTimeText = dialog.findViewById(R.id.descriptionTimeText);
         Button confirmButton = dialog.findViewById(R.id.dialogButton);
         ImageButton deleteButton = dialog.findViewById(R.id.deleteButton);
 
         taskTitle.setText(current.getTitle());
         taskDescription.setText(current.getDescription());
+
+        if(pref.contains(current.getTitle())) {
+            float newTime = pref.getFloat(current.getTitle(), 0.00f);
+            String newTimeString = String.format("%.2f", newTime);
+            descriptionTimeText.setText(newTimeString);
+        }
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -211,6 +226,9 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
             public void onClick(View view) {
                 Log.d("title", "Title: " + current.getTitle());
                 mTaskViewModel.delete(current);
+
+                prefEdit.remove(current.getTitle()).commit();
+
                 dialog.dismiss();
             }
         });

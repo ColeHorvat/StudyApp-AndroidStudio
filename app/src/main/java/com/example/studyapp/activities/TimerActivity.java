@@ -35,8 +35,6 @@ public class TimerActivity extends AppCompatActivity {
     private Spinner timerSpinner;
     private boolean timerRunning;
 
-
-    Context context = TimerActivity.this;
     SharedPreferences pref;
     SharedPreferences.Editor prefEdit;
 
@@ -48,7 +46,7 @@ public class TimerActivity extends AppCompatActivity {
         setContentView(view);
         getSupportActionBar().hide();
 
-        pref = context.getSharedPreferences(getString(R.string.timer_prefs), Context.MODE_PRIVATE);
+        pref = getSharedPreferences(getString(R.string.timer_prefs), Context.MODE_PRIVATE);
         prefEdit = pref.edit();
 
         //Initialize buttons & edit texts
@@ -149,6 +147,14 @@ public class TimerActivity extends AppCompatActivity {
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         timerSpinner.setAdapter(spinnerAdapter);
+
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
     }
 
     private void resetTimer() {
@@ -191,11 +197,13 @@ public class TimerActivity extends AppCompatActivity {
                 timeElapsedInMillis = startTimeInMillis - timeLeftInMillis;
 
                 rSeconds += 1.00;
-                rHours += (rSeconds/60)/60;
+                rHours += (1.00/60.00)/60.00;
 
                 prefEdit.putFloat(selectedTask, rHours);
                 prefEdit.apply();
-                Log.d("timer", "Time: " + pref.getFloat(selectedTask, 69.00f));
+                //Log.d("timer", "Time: " + pref.getFloat(selectedTask, 0.00f) *60);
+                Log.d("timer", "Time: " + rSeconds);
+                Log.d("timer", "Time: " + (rHours * 60) * 60);
 
                 updateCountDownText();
             }

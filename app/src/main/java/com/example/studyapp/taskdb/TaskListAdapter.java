@@ -1,7 +1,7 @@
 package com.example.studyapp.taskdb;
 
 import android.content.Context;
-import android.util.SparseBooleanArray;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,12 +21,14 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
     public List<Task> mTasks; // Cached copy of tasks
     private OnTaskClickListener onTaskClickListener;
     boolean isChecked;
-
-    private SparseBooleanArray mCheckedItems = new SparseBooleanArray();
+    SharedPreferences pref;
+    SharedPreferences.Editor prefEdit;
 
     public TaskListAdapter(Context context, OnTaskClickListener onTaskClickListener) {
         mInflater = LayoutInflater.from(context);
         this.onTaskClickListener = onTaskClickListener;
+        pref = context.getSharedPreferences("timerPrefs", Context.MODE_PRIVATE);
+        prefEdit = pref.edit();
     }
 
     @NonNull
@@ -46,6 +48,11 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
             taskTitleString = current.getTitle().toString();
             taskDescriptionString = current.getDescription().toString();
 
+            if(pref.contains(taskTitleString)) {
+                float newTime = pref.getFloat(taskTitleString, 0.00f);
+                String newTimeString = String.format("%.2f", newTime);
+                holder.timeText.setText(newTimeString);
+            }
 
             if(taskDescriptionString.length() > 10)
                 taskDescriptionString = taskDescriptionString.substring(0,10) + "...";
@@ -92,6 +99,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
 
         private final TextView taskTitleText;
         private final TextView taskDescriptionText;
+        private final TextView timeText;
         private final CheckBox completedCheck;
         OnTaskClickListener onTaskClickListener;
 
@@ -99,6 +107,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
             super(itemView);
             taskTitleText = itemView.findViewById(R.id.titleText);
             taskDescriptionText = itemView.findViewById(R.id.descriptionText);
+            timeText = itemView.findViewById(R.id.timeText);
             completedCheck = itemView.findViewById(R.id.checkBox);
             this.onTaskClickListener = onTaskClickListener;
 
