@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
         if(pref.contains(current.getTitle())) {
             float newTime = pref.getFloat(current.getTitle(), 0.00f);
             String newTimeString = String.format("%.2f", newTime);
-            descriptionTimeText.setText(newTimeString);
+            descriptionTimeText.setText(newTimeString + "h");
         }
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
@@ -227,7 +227,7 @@ public class MainActivity extends AppCompatActivity implements TaskListAdapter.O
                 Log.d("title", "Title: " + current.getTitle());
                 mTaskViewModel.delete(current);
 
-                prefEdit.remove(current.getTitle()).commit();
+                prefEdit.remove(current.getTitle()).apply();
 
                 dialog.dismiss();
             }

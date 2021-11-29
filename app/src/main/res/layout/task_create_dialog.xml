@@ -30,6 +30,7 @@
         android:ems="10"
         android:hint="@string/dialog_description"
         android:inputType="textPersonName"
+        android:singleLine="false"
         android:textColor="#FFFFFF"
         android:textColorHint="#99FFFFFF" />
 

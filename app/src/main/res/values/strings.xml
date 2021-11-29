@@ -41,7 +41,7 @@
 
     <!-- MAIN ACTIVITY -->
     <string name="timer_swipe">Timer</string>
-    <string name="task_time_default">0.00</string>
+    <string name="task_time_default">0.00h</string>
 
     <!-- TIMER ACTIVITY -->
     <string name="task_swipe">Tasks</string>
@@ -62,5 +62,11 @@
 
     <!-- SHARED PREFERENCES KEY -->
     <string name="timer_prefs">timerPrefs</string>
+
+    <!-- NOTIFICATION STRINGS -->
+    <string name="new_notification">Create a new notification</string>
+
+    <string name="channel_name">Timer End Channel</string>
+    <string name="channel_description">This is the channel for the end of the timer</string>
 
 </resources>

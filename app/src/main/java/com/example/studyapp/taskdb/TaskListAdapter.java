@@ -44,18 +44,18 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
             Task current = mTasks.get(position);
             String taskTitleString;
             String taskDescriptionString;
+            float newTime;
+            String timeTextString;
 
+
+            newTime = current.getTimeProgress();
+            timeTextString = String.format("%.2f", newTime);
             taskTitleString = current.getTitle().toString();
             taskDescriptionString = current.getDescription().toString();
 
-            if(pref.contains(taskTitleString)) {
-                float newTime = pref.getFloat(taskTitleString, 0.00f);
-                String newTimeString = String.format("%.2f", newTime);
-                holder.timeText.setText(newTimeString);
-            }
 
-            if(taskDescriptionString.length() > 10)
-                taskDescriptionString = taskDescriptionString.substring(0,10) + "...";
+            if(taskDescriptionString.length() > 15)
+                taskDescriptionString = taskDescriptionString.substring(0,14) + "...";
 
             holder.taskTitleText.setText(taskTitleString);
             holder.taskDescriptionText.setText(taskDescriptionString);
@@ -99,7 +99,6 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
 
         private final TextView taskTitleText;
         private final TextView taskDescriptionText;
-        private final TextView timeText;
         private final CheckBox completedCheck;
         OnTaskClickListener onTaskClickListener;
 
@@ -107,15 +106,21 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
             super(itemView);
             taskTitleText = itemView.findViewById(R.id.titleText);
             taskDescriptionText = itemView.findViewById(R.id.descriptionText);
-            timeText = itemView.findViewById(R.id.timeText);
             completedCheck = itemView.findViewById(R.id.checkBox);
             this.onTaskClickListener = onTaskClickListener;
 
             if(getAdapterPosition() > 0) {
+                String currentTaskTitle = mTasks.get(getAdapterPosition()).getTitle();
+
                 if(mTasks.get(getAdapterPosition()).getIsComplete() == 1) {
                     completedCheck.setChecked(true);
                 }
             }
+
+
+
+
+
 
 
             itemView.setOnClickListener(this);

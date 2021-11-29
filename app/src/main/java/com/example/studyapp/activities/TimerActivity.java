@@ -1,8 +1,11 @@
 package com.example.studyapp.activities;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -15,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import com.example.studyapp.R;
 import com.example.studyapp.databinding.ActivityTimerBinding;
@@ -35,6 +39,9 @@ public class TimerActivity extends AppCompatActivity {
     private Spinner timerSpinner;
     private boolean timerRunning;
 
+    private static final String CHANNEL_ID = "timer_channel";
+    private NotificationManager notificationManager;
+
     SharedPreferences pref;
     SharedPreferences.Editor prefEdit;
 
@@ -45,6 +52,8 @@ public class TimerActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
         getSupportActionBar().hide();
+
+        create_notification_channel();
 
         pref = getSharedPreferences(getString(R.string.timer_prefs), Context.MODE_PRIVATE);
         prefEdit = pref.edit();
@@ -151,12 +160,6 @@ public class TimerActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-    }
-
     private void resetTimer() {
         countDownTimer.cancel();
         timerRunning = false;
@@ -177,7 +180,16 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     private void startTimer() {
-        String selectedTask = timerSpinner.getSelectedItem().toString();
+        String selectedTask;
+
+        if(timerSpinner.getSelectedItem() != null)
+            selectedTask = timerSpinner.getSelectedItem().toString();
+        else {
+            Toast.makeText(this, "Please specify a task", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
 
         rSeconds = 0.00f;
 
@@ -210,8 +222,17 @@ public class TimerActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(TimerActivity.this, CHANNEL_ID)
+                        .setSmallIcon(R.drawable.ic_baseline_alarm_24)
+                        .setContentTitle("Timer Finished")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                        ;
+
+                notificationManager.notify(1, builder.build());
+
                 resetTimer();
-                //TODO: Add Alarm/Notification
+
             }
         }.start();
 
@@ -242,5 +263,19 @@ public class TimerActivity extends AppCompatActivity {
 
         totalMillis = hoursInMillis + minsInMillis + secsInMillis;
         return totalMillis;
+    }
+
+    private void create_notification_channel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+
+            notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+
+        }
     }
 }
