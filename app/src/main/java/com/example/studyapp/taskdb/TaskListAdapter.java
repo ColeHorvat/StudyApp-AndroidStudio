@@ -110,19 +110,10 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
             this.onTaskClickListener = onTaskClickListener;
 
             if(getAdapterPosition() > 0) {
-                String currentTaskTitle = mTasks.get(getAdapterPosition()).getTitle();
-
                 if(mTasks.get(getAdapterPosition()).getIsComplete() == 1) {
                     completedCheck.setChecked(true);
                 }
             }
-
-
-
-
-
-
-
             itemView.setOnClickListener(this);
         }
 
@@ -130,7 +121,6 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
         public void onClick(View view) {
             onTaskClickListener.onTaskClick(mTasks.get(getAdapterPosition()));
         }
-
 
     }
 

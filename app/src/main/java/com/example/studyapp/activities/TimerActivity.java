@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -35,7 +34,7 @@ public class TimerActivity extends AppCompatActivity {
     private String hourString, minutesString, secondsString;
     private Integer hours, minutes, seconds;
     private long startTimeInMillis, timeLeftInMillis, timeElapsedInMillis, endTime;
-    private float rHours, rSeconds, savedTime;
+    private float rHours, savedTime;
     private Button startButton, pauseButton, resetButton;
     private CountDownTimer countDownTimer;
     private Spinner timerSpinner;
@@ -78,6 +77,8 @@ public class TimerActivity extends AppCompatActivity {
         hourText = binding.hourText;
         minuteText = binding.minuteText;
         secondsText = binding.secondsText;
+        timerSpinner = binding.spinner;
+
 
         //Timer button listeners
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -174,7 +175,7 @@ public class TimerActivity extends AppCompatActivity {
             spinnerTitleArray[i] = spinnerList.get(i).getTitle();
         }
 
-        timerSpinner = binding.spinner;
+
 
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerTitleArray);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -230,7 +231,7 @@ public class TimerActivity extends AppCompatActivity {
                 minuteText.setEnabled(true);
                 secondsText.setEnabled(true);
 
-                //timerSpinner.setEnabled(true);
+                timerSpinner.setEnabled(true);
             } else {
                 startButton.setVisibility(View.INVISIBLE);
                 resetButton.setVisibility(View.VISIBLE);
@@ -287,9 +288,6 @@ public class TimerActivity extends AppCompatActivity {
 
                 prefEdit.putFloat(selectedTask, rHours);
                 prefEdit.apply();
-                //Log.d("timer", "Time: " + pref.getFloat(selectedTask, 0.00f) *60);
-                Log.d("timer", "Time: " + rSeconds);
-                Log.d("timer", "Time: " + (rHours * 60) * 60);
 
                 updateCountDownText();
             }

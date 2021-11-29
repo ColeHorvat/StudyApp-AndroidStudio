@@ -1,7 +1,6 @@
 package com.example.studyapp.taskdb;
 
 import android.content.Context;
-import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -20,9 +19,6 @@ public abstract class TaskDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             TaskDatabase.class, "Task_database")
-                            // Wipes and rebuilds instead of migrating
-                            // if no Migration object.
-                            // Migration is not part of this practical.
                             .fallbackToDestructiveMigration()
                             .addCallback(sRoomDatabaseCallback)
                             .build();
@@ -43,36 +39,9 @@ public abstract class TaskDatabase extends RoomDatabase {
                 @Override
                 public void onOpen (@NonNull SupportSQLiteDatabase db){
                     super.onOpen(db);
-                    new PopulateDbAsync(INSTANCE).execute();
+
                 }
             };
-
-    /**
-     * Populate the database in the background.
-     */
-    private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
-
-        private final TaskDao mDao;
-
-        PopulateDbAsync(TaskDatabase db) {
-            mDao = db.TaskDao();
-        }
-
-        @Override
-        protected Void doInBackground(final Void... params) {
-            // Start the app with a clean database every time.
-            // Not needed if you only populate the database
-            // when it is first created
-            //mDao.deleteAll();
-
-            //TODO: Add back in for testing later
-
-            /*
-            Task task = new Task(1, "Test Task", "", "", 0.00f);
-            mDao.insert(task);
-        */
-
-            return null;
-        }
     }
-}
+
+
