@@ -230,7 +230,7 @@ public class TimerActivity extends AppCompatActivity {
                 minuteText.setEnabled(true);
                 secondsText.setEnabled(true);
 
-                timerSpinner.setEnabled(true);
+                //timerSpinner.setEnabled(true);
             } else {
                 startButton.setVisibility(View.INVISIBLE);
                 resetButton.setVisibility(View.VISIBLE);
