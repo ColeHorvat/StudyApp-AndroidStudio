@@ -125,8 +125,10 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
     }
 
     public interface OnTaskClickListener {
+        //On click for recyclerview items
         void onTaskClick(Task current);
 
+        //On Click for task checkboxs
         void onCheckClick(Task current, int newCompleted);
     }
 

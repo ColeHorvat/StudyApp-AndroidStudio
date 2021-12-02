@@ -4,8 +4,8 @@
     android:layout_width="350dp"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
-    android:background="@drawable/layout_modal"
-    android:backgroundTint="#00FFFFFF"
+    android:background="@color/colorModal"
+    android:backgroundTint="#495655"
     android:orientation="vertical">
 
 

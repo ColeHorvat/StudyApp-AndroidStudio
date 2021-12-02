@@ -95,7 +95,7 @@ public class TimerActivity extends AppCompatActivity {
                 minutesString = minuteText.getText().toString();
                 secondsString = secondsText.getText().toString();
 
-                if(hourString == "" || minutesString == "" || secondsString == "") {
+                if(hourString.isEmpty() || minutesString.isEmpty() || secondsString.isEmpty()) {
                     Toast.makeText(TimerActivity.this, "Error with time input", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -177,7 +177,7 @@ public class TimerActivity extends AppCompatActivity {
 
 
 
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerTitleArray);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, spinnerTitleArray);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         timerSpinner.setAdapter(spinnerAdapter);
